@@ -246,26 +246,20 @@ export const MultiImagePickerScreen: React.FC<Props> = ({ navigation }) => {
         <StyledView className="px-lg py-lg border-t border-gray-100 bg-white shadow-ios-sm">
           <StyledView className="flex-row space-x-md">
             <Button
+              title="Add More"
               variant="ghost"
               onPress={() => pickImages(true)}
               className="flex-1"
-            >
-              <Ionicons name="add" size={20} color="#007AFF" />
-              <StyledText className="text-body font-sf-pro text-systemBlue ml-sm font-medium">
-                Add More
-              </StyledText>
-            </Button>
+              leftIcon={<Ionicons name="add" size={20} color="#007AFF" />}
+            />
             
             <Button
+              title={`Continue (${selectedImages.length})`}
               variant="primary"
               onPress={handleContinue}
               disabled={selectedImages.length < 2}
               className="flex-1"
-            >
-              <StyledText className="text-body font-sf-pro text-white font-medium">
-                Continue ({selectedImages.length})
-              </StyledText>
-            </Button>
+            />
           </StyledView>
           
           {selectedImages.length === 1 && (
