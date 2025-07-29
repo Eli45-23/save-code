@@ -126,7 +126,14 @@ export const supabaseHelpers = {
       .eq('id', fileId)
       .single();
     
-    if (error) throw error;
+    if (error) {
+      // Handle "no rows returned" error gracefully
+      if (error.code === 'PGRST116') {
+        console.warn(`File with ID ${fileId} not found`);
+        return null;
+      }
+      throw error;
+    }
     return data;
   },
 
