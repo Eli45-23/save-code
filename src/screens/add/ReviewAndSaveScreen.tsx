@@ -158,13 +158,13 @@ export const ReviewAndSaveScreen: React.FC<Props> = ({ navigation, route }) => {
           {/* Header */}
           <StyledView className="flex-row items-center justify-between mb-xl">
             <Button
+              title=""
               variant="ghost"
               size="medium"
               onPress={() => navigation.goBack()}
               className="min-h-[44px] w-11 h-11 p-0 items-center justify-center"
-            >
-              <Ionicons name="arrow-back" size={24} color="#007AFF" />
-            </Button>
+              leftIcon={<Ionicons name="arrow-back" size={24} color="#007AFF" />}
+            />
             <StyledText className="text-title3 font-sf-pro-display font-semibold text-gray-900">
               Review & Save
             </StyledText>
