@@ -104,10 +104,13 @@ export const ReviewAndSaveScreen: React.FC<Props> = ({ navigation, route }) => {
             {
               text: 'View File',
               onPress: () => {
-                navigation.getParent()?.navigate('Files', {
-                  screen: 'FileDetail',
-                  params: { fileId: result.fileId, fileName: title || 'Untitled' }
-                });
+                // Add small delay to ensure file creation transaction has completed
+                setTimeout(() => {
+                  navigation.getParent()?.navigate('Files', {
+                    screen: 'FileDetail',
+                    params: { fileId: result.fileId, fileName: title || 'Untitled' }
+                  });
+                }, 500);
               }
             },
             {
