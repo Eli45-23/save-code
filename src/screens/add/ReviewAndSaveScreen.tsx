@@ -352,7 +352,7 @@ export const ReviewAndSaveScreen: React.FC<Props> = ({ navigation, route }) => {
                       <Tag
                         key={tag}
                         text={tag}
-                        variant="outline"
+                        variant="outlined"
                         onRemove={() => removeTag(tag)}
                         className="mr-xs mb-xs"
                       />
