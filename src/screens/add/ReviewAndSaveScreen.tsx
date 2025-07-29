@@ -325,7 +325,7 @@ export const ReviewAndSaveScreen: React.FC<Props> = ({ navigation, route }) => {
                     {classification?.language?.language && (
                       <Tag
                         text={classification.language.language}
-                        variant="primary"
+                        variant="filled"
                         className="mr-xs mb-xs"
                       />
                     )}
