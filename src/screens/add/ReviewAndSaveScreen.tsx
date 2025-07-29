@@ -306,16 +306,13 @@ export const ReviewAndSaveScreen: React.FC<Props> = ({ navigation, route }) => {
                   Tags & Classification
                 </StyledText>
                 <Button
+                  title="Add Tag"
                   variant="ghost"
                   size="small"
                   onPress={addCustomTag}
                   className="px-md py-sm min-h-[44px]"
-                >
-                  <Ionicons name="add" size={16} color="#007AFF" />
-                  <StyledText className="text-footnote font-sf-pro text-systemBlue ml-xs">
-                    Add Tag
-                  </StyledText>
-                </Button>
+                  leftIcon={<Ionicons name="add" size={16} color="#007AFF" />}
+                />
               </StyledView>
 
               {/* Auto-detected section */}
