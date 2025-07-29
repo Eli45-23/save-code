@@ -375,27 +375,17 @@ export const ReviewAndSaveScreen: React.FC<Props> = ({ navigation, route }) => {
       {/* Save Button */}
       <StyledView className="px-lg py-lg border-t border-gray-100 bg-white shadow-ios-sm">
         <Button
+          title={saving ? 
+            (isMultiple ? 'Processing...' : 'Saving...') : 
+            (isMultiple ? `Process ${images.length} Screenshots` : 'Save Code Snippet')
+          }
           variant="primary"
           onPress={handleSave}
           disabled={saving || (!isMultiple && !editedText.trim()) || (isMultiple && images.length === 0)}
           className="w-full"
-        >
-          {saving ? (
-            <StyledView className="flex-row items-center">
-              <Ionicons name="refresh" size={20} color="white" />
-              <StyledText className="text-body font-sf-pro text-white ml-sm font-medium">
-                {isMultiple ? 'Processing...' : 'Saving...'}
-              </StyledText>
-            </StyledView>
-          ) : (
-            <StyledView className="flex-row items-center">
-              <Ionicons name={isMultiple ? "flash" : "save"} size={20} color="white" />
-              <StyledText className="text-body font-sf-pro text-white ml-sm font-medium">
-                {isMultiple ? `Process ${images.length} Screenshots` : 'Save Code Snippet'}
-              </StyledText>
-            </StyledView>
-          )}
-        </Button>
+          loading={saving}
+          leftIcon={saving ? undefined : <Ionicons name={isMultiple ? "flash" : "save"} size={20} color="white" />}
+        />
       </StyledView>
     </SafeAreaView>
   );
