@@ -316,7 +316,7 @@ export const ReviewAndSaveScreen: React.FC<Props> = ({ navigation, route }) => {
               </StyledView>
 
               {/* Auto-detected section */}
-              {(classification?.language?.language || (classification?.topic?.frameworks && classification.topic.frameworks.length > 0)) && (
+              {classification?.language?.language && (
                 <StyledView className="mb-lg">
                   <StyledText className="text-caption1 font-sf-pro text-gray-600 mb-sm font-medium">
                     AUTO-DETECTED
