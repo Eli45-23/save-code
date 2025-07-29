@@ -106,7 +106,7 @@ export const ReviewAndSaveScreen: React.FC<Props> = ({ navigation, route }) => {
               onPress: () => {
                 navigation.getParent()?.navigate('Files', {
                   screen: 'FileDetail',
-                  params: { fileId: result.fileId, fileName: result.title || 'Untitled' }
+                  params: { fileId: result.fileId, fileName: title || 'Untitled' }
                 });
               }
             },
