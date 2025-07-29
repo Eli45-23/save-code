@@ -60,8 +60,8 @@ export const FileDetailScreen: React.FC<FileDetailScreenProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
 
-  // Fetch file data
-  const fetchFileData = useCallback(async (showLoader = true) => {
+  // Fetch file data with retry mechanism
+  const fetchFileData = useCallback(async (showLoader = true, retryCount = 0) => {
     if (!user) return;
     
     try {
@@ -74,14 +74,35 @@ export const FileDetailScreen: React.FC<FileDetailScreenProps> = ({
         setFile(fileData);
         setSnippets(fileData.snippets || []);
       } else {
+        // If file not found and this is the first attempt, retry after a short delay
+        // This handles race conditions where file creation hasn't fully committed
+        if (retryCount === 0) {
+          console.log('File not found on first attempt, retrying in 1 second...');
+          setTimeout(() => {
+            fetchFileData(false, 1); // Retry without showing loader
+          }, 1000);
+          return;
+        }
         setError('File not found');
       }
     } catch (err) {
       console.error('Error fetching file data:', err);
+      
+      // If error is "no rows returned" and this is the first attempt, retry
+      if (err instanceof Error && err.message.includes('multiple (or no) rows returned') && retryCount === 0) {
+        console.log('Retrying file fetch due to timing issue...');
+        setTimeout(() => {
+          fetchFileData(false, 1); // Retry without showing loader
+        }, 1000);
+        return;
+      }
+      
       setError(err instanceof Error ? err.message : 'Failed to load file data');
     } finally {
-      setLoading(false);
-      setRefreshing(false);
+      if (retryCount === 0) { // Only clear loading state on first attempt
+        setLoading(false);
+        setRefreshing(false);
+      }
     }
   }, [fileId, user]);
 
