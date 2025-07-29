@@ -329,15 +329,6 @@ export const ReviewAndSaveScreen: React.FC<Props> = ({ navigation, route }) => {
                         className="mr-xs mb-xs"
                       />
                     )}
-                    
-                    {classification?.topic?.frameworks?.map((framework: string) => (
-                      <Tag
-                        key={framework}
-                        text={framework}
-                        variant="secondary"
-                        className="mr-xs mb-xs"
-                      />
-                    ))}
                   </StyledView>
                 </StyledView>
               )}
