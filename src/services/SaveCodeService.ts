@@ -437,10 +437,11 @@ export class SaveCodeService {
           
           // Update file snippet count
           try {
+            // Note: Increment would need to be done server-side or with RPC function
+            // For now, we'll skip the snippet count update
             await supabase
               .from('files')
               .update({ 
-                snippet_count: supabase.sql`snippet_count + 1`,
                 updated_at: new Date().toISOString() 
               })
               .eq('id', snippetData.fileId);
