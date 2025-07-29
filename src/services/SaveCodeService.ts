@@ -1032,16 +1032,18 @@ export class SaveCodeService {
       const mockClassification: ClassificationResult = {
         language: {
           language: 'javascript', // Default, could be detected from extractedText
-          confidence: 0.8
+          confidence: 0.8,
+          allScores: { javascript: 0.8 }
         },
         topic: {
           primaryTopic: params.title,
           confidence: 0.8,
-          suggestedTags: params.customTags,
-          frameworks: []
+          allTopics: { [params.title]: 0.8 },
+          suggestedTags: params.customTags
         },
         shouldAppendToExisting: false,
-        similarFiles: []
+        similarFiles: [],
+        suggestedName: params.title
       };
 
       // Step 1: Check if should create new file or append to existing
